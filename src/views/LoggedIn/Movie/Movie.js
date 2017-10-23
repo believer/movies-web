@@ -111,7 +111,7 @@ const MovieQuery = gql`
       production_companies
       poster
       release_date
-      synopsis
+      overview
       runtime
       tagline
       wilhelm
