@@ -1,44 +1,28 @@
 // @flow
 
-import './Feed.css'
 import React from 'react'
-import { graphql } from 'react-apollo'
-import gql from 'graphql-tag'
 import Gravatar from '../../../components/Gravatar/Gravatar'
 import moment from 'moment'
+import { createFragmentContainer, graphql } from 'react-relay'
 
 type Props = {
-  data: {
-    error?: {
-      message: string
+  feed: {
+    genres: string[],
+    title: string,
+    id: string,
+    rating: number,
+    user: {
+      email: string,
+      id: string
     },
-    loading: boolean,
-    feed: {
-      genres: string[],
-      title: string,
-      id: string,
-      rating: number,
-      user: {
-        email: string,
-        id: string
-      },
-      views: string[]
-    }[]
-  },
+    views: string[]
+  }[],
   history: {
     push: string => void
   }
 }
 
-const Feed = ({ data: { error, loading, feed }, history }: Props) => {
-  if (error) {
-    return <div>{error.message}</div>
-  }
-
-  if (loading) {
-    return <div>Loading</div>
-  }
-
+const Feed = ({ feed, history }: Props) => {
   return (
     <ul className="Feed">
       {feed.map((movie, i) => (
@@ -67,21 +51,18 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
   )
 }
 
-export const FeedQuery = gql`
-  query feed {
-    feed(limit: 10) {
+export default createFragmentContainer(
+  Feed,
+  graphql`
+    fragment Feed_feed on Movie @relay(plural: true) {
       genres
       id
-      title
       rating
+      title
       user {
         email
-        id
       }
       views
-      year
     }
-  }
-`
-
-export default graphql(FeedQuery)(Feed)
+  `
+)

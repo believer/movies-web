@@ -2,7 +2,7 @@
 
 import './LoggedIn.css'
 import React from 'react'
-import Feed from './Feed/Feed'
+import FeedContainer from './Feed/FeedContainer'
 import Movie from './Movie/Movie'
 import AddMovie from './AddMovie/AddMovie'
 import { Switch, Route } from 'react-router-dom'
@@ -14,7 +14,7 @@ const LoggedIn = () => {
       <Navigation />
       <div>
         <Switch>
-          <Route path="/dashboard/feed" component={Feed} />
+          <Route path="/dashboard/feed" component={FeedContainer} />
           <Route path="/dashboard/add-movie" component={AddMovie} />
           <Route path="/dashboard/movie/:id" component={Movie} />
         </Switch>

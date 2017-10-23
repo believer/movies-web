@@ -1,0 +1,155 @@
+type CountWithYear {
+  count: Int
+  year: String
+}
+
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+type Movie {
+  actors: [String]
+  backdrop: String
+  countries: [String]
+  directors: [String]
+  genres: [String]
+  id: String
+  imdb_id: String
+  languages: [String]
+  composers: [String]
+  title: String
+  overview: String
+  production_companies: [String]
+  producers: [String]
+  poster: String
+  release_date: String
+  rating: Int
+  runtime: Int
+  tagline: String
+  tmdb_id: String
+  user: User
+  views: [String]
+  wilhelm: Boolean
+  writers: [String]
+  year: String
+}
+
+input MovieInput {
+  # IMDb ID or IMDb URL
+  imdbId: String!
+  rating: Int = 0
+
+  # View date
+  date: String
+
+  # The famous Wilhelm Scream
+  wilhelm: Boolean = false
+}
+
+# The allowed mutations
+type Mutation {
+  insertMovie(input: MovieInput!): Movie
+  updateRating(input: RatingInput!): Movie
+  login(input: LoginInput!): Token
+}
+
+type PersonInMovies {
+  name: String
+  number_of_movies: Int
+  ranking: Int
+}
+
+enum PersonType {
+  actor
+  composer
+  director
+  writer
+}
+
+type Query {
+  # Return a feed of all users watches or
+  # if provided with an ID only one users feed
+  feed(limit: Int = 50, offset: Int = 0): [Movie]!
+  friends: [User]!
+
+  # Takes an required ID that can be either
+  # the ID in the database OR an IMDb ID (i.e. tt0180093)
+  movie(id: String!): Movie
+  movies(limit: Int = 50, offset: Int = 0): [Movie]
+  bestForYears(ranking: Int!): [Movie]
+  moviesPerYear(year: String): [CountWithYear]
+  moviesWithRating(rating: Int!): [Movie]
+  person(name: String!, role: PersonType!): [Movie]
+
+  # All users ratings for a specific movie
+  ratings(movieId: Int!): [Ratings]!
+  totalByPerson(role: PersonType!, ranked: Int = 10, name: String): [PersonInMovies]
+  totalByRole(role: PersonType!): Int
+  users(id: Int): [User]!
+  userMoviesPerYear: [CountWithYear]
+
+  # Total amounts of time spent watching movies,
+  # both for single views and adjusted with rewatches
+  userRuntime: RuntimeWithAdjusted
+  views(offset: Int = 0, limit: Int = 10): [View]
+  watches: Watches
+}
+
+input RatingInput {
+  # ID in DB
+  movieId: String!
+
+  # New rating
+  rating: Int!
+}
+
+type Ratings {
+  rating: Int
+  user: User
+}
+
+type Runtime {
+  days: Int
+  minutes: Int
+  hours: Int
+  years: Float
+}
+
+type RuntimeWithAdjusted {
+  total_with_rewatches: Runtime
+  total: Runtime
+}
+
+type Token {
+  token: String!
+}
+
+type UpdatedRating {
+  movie_id: Int
+  rating: Int
+}
+
+type User {
+  email: String
+  id: Int
+  name: String
+}
+
+type View {
+  movie_id: Int
+  title: String
+  dates: [ViewDate]
+  views_count: Int
+}
+
+type ViewDate {
+  date: String
+  userId: Int
+}
+
+type Watches {
+  views_with_rewatches: Int
+  total_views: Int
+}
+
