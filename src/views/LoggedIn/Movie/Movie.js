@@ -42,10 +42,12 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
       <div className="Movie__meta">
         <div className="Movie__poster">
           <img
+            alt="Poster"
             className="Movie__poster-image"
             src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
           />
           <img
+            alt="Poster shadow"
             className="Movie__poster-shadow"
             src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
           />
