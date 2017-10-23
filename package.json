@@ -1,0 +1,45 @@
+{
+  "name": "movies",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "apollo-cache-inmemory": "^0.2.0-rc.3",
+    "apollo-client": "^2.0.0-rc.5",
+    "apollo-link": "^0.6.1-beta.6",
+    "apollo-link-http": "^0.8.0",
+    "classnames": "^2.2.5",
+    "formik": "^0.9.4",
+    "graphql-tag": "^2.5.0",
+    "md5": "^2.2.1",
+    "moment": "^2.19.1",
+    "react": "^16.0.0",
+    "react-apollo": "^1.4.16",
+    "react-dom": "^16.0.0",
+    "react-router-dom": "^4.2.2",
+    "react-scripts": "1.0.14",
+    "yup": "^0.23.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "devDependencies": {
+    "babel-eslint": "^8.0.1",
+    "enzyme": "^3.1.0",
+    "enzyme-adapter-react-16": "^1.0.2",
+    "enzyme-to-json": "^3.1.4",
+    "eslint": "^4.9.0",
+    "eslint-plugin-flowtype": "^2.39.1",
+    "eslint-plugin-react": "^7.4.0",
+    "flow-bin": "^0.57.3",
+    "jest-cli": "^21.2.1",
+    "prop-types": "^15.6.0"
+  },
+  "jest": {
+    "snapshotSerializers": [
+      "enzyme-to-json/serializer"
+    ]
+  }
+}

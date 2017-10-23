@@ -1,0 +1,77 @@
+.Latest {
+  align-items: center;
+  background-size: cover;
+  background-position: center center;
+  display: flex;
+  height: 500px;
+  justify-content: center;
+  position: relative;
+}
+
+.Latest__overlay {
+  background: rgba(33, 33, 33, 0.5);
+  bottom: 0;
+  left: 0;
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
+.Latest__content {
+  color: #fff;
+  font-size: 60px;
+  font-weight: 700;
+  position: relative;
+  z-index: 1;  
+  width: 960px;
+}
+
+.Latest__movie-genres {
+  color: #E77587;
+  font-size: 21px;
+  margin-top: 20px;
+}
+
+.Feed {
+  padding: 60px;
+}
+
+.Feed__movie {
+  align-items: center;
+  background-color: #fff;
+  border-radius: 3px; 
+  box-shadow: 0 10px 20px 0 rgba(33,33,33,0.07);
+  cursor: pointer;
+  display: flex;
+  padding: 15px 20px;
+  transition: transform 300ms ease-in-out, box-shadow 300ms ease-in-out;
+}
+
+.Feed__movie:not(:last-child) {
+  margin-bottom: 5px;
+}
+
+.Feed__movie:hover {
+  box-shadow: 0 10px 20px 10px rgba(33,33,33,0.2);
+  transform: scale(1.05);
+}
+
+.Feed__content {
+  margin-left: 20px;
+}
+
+.Feed__rating {
+  margin-left: auto;
+}
+
+.Feed__genres {
+  color: #E77587;
+  font-size: 12px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+}
+
+.Feed__view-date {
+  color: #ccc;
+  font-size: 12px;
+}

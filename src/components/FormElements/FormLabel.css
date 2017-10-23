@@ -1,0 +1,16 @@
+/*------------------------------------------------------------
+// FormLabel
+//
+//----------------------------------------------------------*/
+
+.FormLabel {
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px
+}
+
+.FormLabel__required {
+  color: red;
+  margin-left: 5px;
+}
