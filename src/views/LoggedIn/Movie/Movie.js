@@ -4,13 +4,10 @@ import './Movie.css'
 import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
+import type { ApolloBaseData } from '../../../types'
 
 type Props = {
-  data: {
-    error?: {
-      message: string
-    },
-    loading: boolean,
+  data: ApolloBaseData & {
     movie: {
       actors: string[],
       backdrop: string,

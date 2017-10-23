@@ -3,31 +3,27 @@
 import './Feed.css'
 import React from 'react'
 import { graphql } from 'react-apollo'
+import { filter } from 'graphql-anywhere'
 import gql from 'graphql-tag'
-import Gravatar from '../../../components/Gravatar/Gravatar'
-import moment from 'moment'
+import FeedItem from './FeedItem'
+import type { RouterHistory } from 'react-router-dom'
+import type { ApolloBaseData } from '../../../types'
+
+export type FeedMovie = {
+  genres: string[],
+  title: string,
+  id: string,
+  rating: number,
+  user: {
+    email: string,
+    id: string
+  },
+  views: string[]
+}
 
 type Props = {
-  data: {
-    error?: {
-      message: string
-    },
-    loading: boolean,
-    feed: {
-      genres: string[],
-      title: string,
-      id: string,
-      rating: number,
-      user: {
-        email: string,
-        id: string
-      },
-      views: string[]
-    }[]
-  },
-  history: {
-    push: string => void
-  }
+  data: ApolloBaseData & { feed: FeedMovie[] },
+  history: RouterHistory
 }
 
 const Feed = ({ data: { error, loading, feed }, history }: Props) => {
@@ -42,26 +38,11 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
   return (
     <ul className="Feed">
       {feed.map((movie, i) => (
-        <li
-          className="Feed__movie"
+        <FeedItem
+          history={history}
           key={`movie-${i}`}
-          onClick={() => history.push(`/dashboard/movie/${movie.id}`)}
-        >
-          <Gravatar email={movie.user.email} size={40} />
-          <div className="Feed__content">
-            {movie.title}
-            <div className="Feed__genres">
-              {movie.genres
-                .slice()
-                .sort()
-                .join(', ')}
-            </div>
-            <div className="Feed__view-date">
-              {moment(movie.views[0]).fromNow()}
-            </div>
-          </div>
-          <div className="Feed__rating">{movie.rating}</div>
-        </li>
+          movie={filter(FeedItem.fragments.movie, movie)}
+        />
       ))}
     </ul>
   )
@@ -70,18 +51,11 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
 export const FeedQuery = gql`
   query feed {
     feed(limit: 10) {
-      genres
-      id
-      title
-      rating
-      user {
-        email
-        id
-      }
-      views
-      year
+      ... FeedItemMovie
     }
   }
+
+  ${FeedItem.fragments.movie}
 `
 
 export default graphql(FeedQuery)(Feed)
