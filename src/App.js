@@ -13,7 +13,7 @@ import LoggedIn from './views/LoggedIn/LoggedIn'
 
 import './App.css'
 
-const httpLink = createHttpLink({ uri: 'http://localhost:3000/graphql' })
+const httpLink = createHttpLink({ uri: process.env.REACT_APP_API_URL })
 const middlewareLink = new ApolloLink((operation, forward) => {
   operation.setContext({
     headers: {
