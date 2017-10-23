@@ -6,7 +6,7 @@ import { ApolloLink } from 'apollo-link'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
-import { BrowserRouter, Switch, Route } from 'react-router-dom'
+import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
 
 import Login from './views/Login/Login'
 import LoggedIn from './views/LoggedIn/LoggedIn'
@@ -33,7 +33,8 @@ const App = () => {
     <ApolloProvider client={client}>
       <BrowserRouter>
         <Switch>
-          <Route path="/" render={LoggedIn} />
+          <Route exact path="/" render={() => <Redirect to="/login" />} />
+          <Route path="/dashboard" render={LoggedIn} />
           <Route path="/login" component={Login} />
         </Switch>
       </BrowserRouter>

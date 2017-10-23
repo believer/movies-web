@@ -45,7 +45,7 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
         <li
           className="Feed__movie"
           key={`movie-${i}`}
-          onClick={() => history.push(`/movie/${movie.id}`)}
+          onClick={() => history.push(`/dashboard/movie/${movie.id}`)}
         >
           <Gravatar email={movie.user.email} size={40} />
           <div className="Feed__content">

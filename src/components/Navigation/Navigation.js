@@ -13,7 +13,7 @@ const Navigation = () => {
           <NavLink
             activeClassName="Navigation__link--active"
             className="Navigation__link"
-            to="/feed"
+            to="/dashboard/feed"
           >
             Feed
           </NavLink>
@@ -22,7 +22,7 @@ const Navigation = () => {
           <NavLink
             activeClassName="Navigation__link--active"
             className="Navigation__link"
-            to="/add-movie"
+            to="/dashboard/add-movie"
           >
             Add movie
           </NavLink>

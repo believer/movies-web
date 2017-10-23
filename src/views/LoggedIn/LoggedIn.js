@@ -14,9 +14,9 @@ const LoggedIn = () => {
       <Navigation />
       <div>
         <Switch>
-          <Route path="/feed" component={Feed} />
-          <Route path="/add-movie" component={AddMovie} />
-          <Route path="/movie/:id" component={Movie} />
+          <Route path="/dashboard/feed" component={Feed} />
+          <Route path="/dashboard/add-movie" component={AddMovie} />
+          <Route path="/dashboard/movie/:id" component={Movie} />
         </Switch>
       </div>
     </div>

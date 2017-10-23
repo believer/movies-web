@@ -4,7 +4,10 @@ WORKDIR /app
 
 ADD package.json /app/package.json
 RUN npm install --silent
+RUN npm install -g serve
 
 ADD . /app
 
-CMD npm start
+RUN npm run build
+
+CMD serve -s build

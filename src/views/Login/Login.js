@@ -26,7 +26,7 @@ class Login extends Component<Props> {
     })
 
     localStorage.setItem('token', result.data.login.token)
-    this.props.history.push('/feed')
+    this.props.history.push('/dashboard/feed')
   }
 
   render () {
