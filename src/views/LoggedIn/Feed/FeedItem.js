@@ -6,6 +6,8 @@ import Gravatar from '../../../components/Gravatar/Gravatar'
 import moment from 'moment'
 import type { FeedMovie } from './Feed'
 import type { RouterHistory } from 'react-router-dom'
+import Card from './Card'
+import FeedItemGenres from './FeedItemGenres'
 
 type Props = {
   movie: FeedMovie,
@@ -39,22 +41,22 @@ class FeedItem extends Component<Props> {
     const { movie } = this.props
 
     return (
-      <li className="Feed__movie" onClick={this.handleClick}>
+      <Card onClick={this.handleClick}>
         <Gravatar email={movie.user.email} size={40} />
         <div className="Feed__content">
           {movie.title}
-          <div className="Feed__genres">
+          <FeedItemGenres>
             {movie.genres
               .slice()
               .sort()
               .join(', ')}
-          </div>
+          </FeedItemGenres>
           <div className="Feed__view-date">
             {moment(movie.views[0]).fromNow()}
           </div>
         </div>
         <div className="Feed__rating">{movie.rating}</div>
-      </li>
+      </Card>
     )
   }
 }

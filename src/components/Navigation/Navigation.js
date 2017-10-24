@@ -1,34 +1,25 @@
 // @flow
 
-import './Navigation.css'
 import React from 'react'
-import { NavLink } from 'react-router-dom'
+import InlineList from './InlineList'
+import Header from './Header'
+import Logo from './Logo'
+import NavigationItem from './NavigationItem'
+import NavigationLink from './NavigationLink'
 
 const Navigation = () => {
   return (
-    <div className="Navigation">
-      <div className="Navigation__logo">Movies</div>
-      <ul className="Navigation__list">
-        <li className="Navigation__item">
-          <NavLink
-            activeClassName="Navigation__link--active"
-            className="Navigation__link"
-            to="/dashboard/feed"
-          >
-            Feed
-          </NavLink>
-        </li>
-        <li className="Navigation__item">
-          <NavLink
-            activeClassName="Navigation__link--active"
-            className="Navigation__link"
-            to="/dashboard/add-movie"
-          >
-            Add movie
-          </NavLink>
-        </li>
-      </ul>
-    </div>
+    <Header>
+      <Logo>Movies</Logo>
+      <InlineList>
+        <NavigationItem>
+          <NavigationLink to="/dashboard/feed">Feed</NavigationLink>
+        </NavigationItem>
+        <NavigationItem>
+          <NavigationLink to="/dashboard/add-movie">Add movie</NavigationLink>
+        </NavigationItem>
+      </InlineList>
+    </Header>
   )
 }
 

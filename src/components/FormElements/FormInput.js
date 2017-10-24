@@ -6,6 +6,7 @@ import { Field } from 'formik'
 import './FormInput.css'
 import FormLabel from '../FormElements/FormLabel'
 import FormError from './FormError'
+import styled from 'styled-components'
 
 type Props = {
   name: string,
@@ -21,6 +22,16 @@ type Context = {
   }
 }
 
+const Wrap = styled.div`
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+  display: flex;
+  margin-bottom: 10px;
+  transition: border-color ease-in-out 150ms, box-shadow ease-in-out 150ms;
+`
+
 const FormInput = (
   { name, placeholder, required, type }: Props,
   { formik }: Context
@@ -31,7 +42,7 @@ const FormInput = (
   return (
     <div>
       <FormLabel htmlFor={name} label={placeholder} required={required} />
-      <div className="FormInput__wrap">
+      <Wrap>
         <Field
           className="FormInput"
           id={name}
@@ -39,8 +50,8 @@ const FormInput = (
           placeholder={placeholder}
           type={type}
         />
-      </div>
-      {!!error && touched && <FormError error={error} />}
+      </Wrap>
+      {!!error && touched && <FormError>{error}</FormError>}
     </div>
   )
 }

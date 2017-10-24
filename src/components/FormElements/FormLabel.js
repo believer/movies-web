@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import './FormLabel.css'
+import styled from 'styled-components'
 
 type Props = {
   htmlFor: string,
@@ -9,12 +9,24 @@ type Props = {
   required?: boolean
 }
 
+const Label = styled.label`
+  display: block;
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 10px;
+`
+
+const Required = styled.span`
+  color: red;
+  margin-left: 5px;
+`
+
 const FormLabel = ({ htmlFor, label, required }: Props) => {
   return (
-    <label className="FormLabel" htmlFor={htmlFor}>
+    <Label htmlFor={htmlFor}>
       {label}
-      {required && <span className="FormLabel__required">*</span>}
-    </label>
+      {required && <Required>*</Required>}
+    </Label>
   )
 }
 

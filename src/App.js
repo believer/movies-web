@@ -7,6 +7,7 @@ import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
+import { ThemeProvider } from 'styled-components'
 
 import Login from './views/Login/Login'
 import LoggedIn from './views/LoggedIn/LoggedIn'
@@ -28,16 +29,22 @@ const client = new ApolloClient({
   cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
 })
 
+const theme = {
+  primary: '#E77587',
+}
+
 const App = () => {
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <Switch>
-          <Route exact path="/" render={() => <Redirect to="/login" />} />
-          <Route path="/dashboard" render={LoggedIn} />
-          <Route path="/login" component={Login} />
-        </Switch>
-      </BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <BrowserRouter>
+          <Switch>
+            <Route exact path="/" render={() => <Redirect to="/login" />} />
+            <Route path="/dashboard" render={LoggedIn} />
+            <Route path="/login" component={Login} />
+          </Switch>
+        </BrowserRouter>
+      </ThemeProvider>
     </ApolloProvider>
   )
 }

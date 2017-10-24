@@ -5,6 +5,9 @@ import React from 'react'
 import { graphql } from 'react-apollo'
 import gql from 'graphql-tag'
 import type { ApolloBaseData } from '../../../types'
+import Genre from './Genre'
+import Poster from './Poster'
+import MetaSubtitle from './MetaSubtitle'
 
 type Props = {
   data: ApolloBaseData & {
@@ -37,34 +40,24 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
   return (
     <div className="Movie">
       <div className="Movie__meta">
-        <div className="Movie__poster">
-          <img
-            alt="Poster"
-            className="Movie__poster-image"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
-          />
-          <img
-            alt="Poster shadow"
-            className="Movie__poster-shadow"
-            src={`https://image.tmdb.org/t/p/w500${movie.poster}`}
-          />
-        </div>
+        <Poster src={`https://image.tmdb.org/t/p/w500${movie.poster}`} />
+
         <h1>{movie.title}</h1>
 
-        <h4>Genres</h4>
+        <MetaSubtitle>Genres</MetaSubtitle>
         <ul className="Movie__genres">
           {movie.genres.map((genre, i) => (
-            <li className="Movie__genre" key={`genre-${i}`}>
-              {genre}
-            </li>
+            <Genre key={`genre-${i}`}>{genre}</Genre>
           ))}
         </ul>
+
+        <MetaSubtitle>Runtime</MetaSubtitle>
         {movie.runtime}
 
-        <h4>Director</h4>
+        <MetaSubtitle>Director</MetaSubtitle>
         <ul>
           {movie.directors.map((person, i) => (
-            <li key={`person-${i}`}>{person}</li>
+            <li key={`director-${i}`}>{person}</li>
           ))}
         </ul>
       </div>
@@ -77,15 +70,18 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
             }}
           />
         )}
+
+        <MetaSubtitle>Cast</MetaSubtitle>
         <ul>
           {movie.actors.map((person, i) => (
-            <li key={`person-${i}`}>{person}</li>
+            <li key={`actor-${i}`}>{person}</li>
           ))}
         </ul>
 
+        <MetaSubtitle>Composer</MetaSubtitle>
         <ul>
           {movie.composers.map((person, i) => (
-            <li key={`person-${i}`}>{person}</li>
+            <li key={`composer-${i}`}>{person}</li>
           ))}
         </ul>
       </div>

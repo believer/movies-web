@@ -1,21 +1,21 @@
-// @flow
+import styled from 'styled-components'
 
-import React from 'react'
-import './Button.css'
+const Button = styled.button`
+  appearance: none;
+  background-color: #e77587;
+  border: 0;
+  border-radius: 3px;
+  color: #fff;
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.9;
+  padding: 10px 20px;
+  transition: opacity 200ms ease-in-out;
 
-type Props = {
-  children: string,
-  disabled?: boolean,
-  type: string
-}
-
-const Button = ({ children, disabled, type }: Props) => {
-  return (
-    <button className="Button" disabled={disabled} type={type}>
-      {children}
-    </button>
-  )
-}
+  &:hover {
+    opacity: 1;
+  }
+`
 
 Button.defaultProps = {
   type: 'button',
