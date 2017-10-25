@@ -8,10 +8,11 @@ import type { ApolloBaseData } from '../../../types'
 import Genre from './Genre'
 import Poster from './Poster'
 import MetaSubtitle from './MetaSubtitle'
+import tmdbLink from '../../../utils/tmdbLink'
 
 type Props = {
   data: ApolloBaseData & {
-    movie: {
+    movie?: {
       actors: string[],
       backdrop: string,
       composers: string[],
@@ -37,10 +38,14 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
     return <div>Loading</div>
   }
 
+  if (!movie) {
+    return null
+  }
+
   return (
     <div className="Movie">
       <div className="Movie__meta">
-        <Poster src={`https://image.tmdb.org/t/p/w500${movie.poster}`} />
+        <Poster src={tmdbLink(movie.poster, 500, 'poster')} />
 
         <h1>{movie.title}</h1>
 
@@ -66,7 +71,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
           <div
             className="Movie__backdrop"
             style={{
-              backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop})`,
+              backgroundImage: tmdbLink(movie.backdrop, 1280, 'backdrop'),
             }}
           />
         )}

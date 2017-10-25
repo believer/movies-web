@@ -4,19 +4,22 @@ import './AddMovie.css'
 import React from 'react'
 import { graphql } from 'react-apollo'
 import { Formik, Form } from 'formik'
+import type { RouterHistory } from 'react-router-dom'
 import gql from 'graphql-tag'
 import yup from 'yup'
 import FormInput from '../../../components/FormElements/FormInput'
+import FormDebugger from '../../../components/FormElements/FormDebugger'
 import Button from '../../../components/Button/Button'
 
 type Props = {
+  history: RouterHistory,
   mutate: Function
 }
 
-const AddMovie = ({ mutate }: Props) => {
+const AddMovie = ({ history, mutate }: Props) => {
   return (
     <Formik
-      initialValues={{ imdbId: '', rating: 0 }}
+      initialValues={{ imdbId: '', rating: 0, date: '', wilhelm: false }}
       onSubmit={values => {
         mutate({
           variables: {
@@ -25,9 +28,12 @@ const AddMovie = ({ mutate }: Props) => {
             },
           },
         })
+
+        history.push('/dashboard/feed')
       }}
       render={({ isValid }) => (
         <Form className="AddMovie">
+          <FormDebugger />
           <FormInput name="imdbId" placeholder="IMDb ID" />
           <FormInput
             min="0"
@@ -36,6 +42,8 @@ const AddMovie = ({ mutate }: Props) => {
             placeholder="Rating"
             type="number"
           />
+          <FormInput name="date" placeholder="Date" type="date" />
+          <FormInput name="wilhelm" placeholder="Wilhelm" type="checkbox" />
           <Button disabled={!isValid} type="submit">
             Add movie
           </Button>
@@ -45,8 +53,10 @@ const AddMovie = ({ mutate }: Props) => {
         imdbId: yup.string().required(),
         rating: yup
           .number()
-          .min(0)
+          .min(1)
           .max(10),
+        date: yup.date(),
+        wilhelm: yup.boolean(),
       })}
     />
   )

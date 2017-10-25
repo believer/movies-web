@@ -25,7 +25,7 @@ type Context = {
 const Wrap = styled.div`
   background: #fff;
   border: 1px solid #ccc;
-  border-radius: 5px;
+  border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   display: flex;
   margin-bottom: 10px;

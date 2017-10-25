@@ -12,6 +12,12 @@ const Button = styled.button`
   padding: 10px 20px;
   transition: opacity 200ms ease-in-out;
 
+  ${props =>
+    props.disabled &&
+    `
+    background-color: #ccc;
+  `};
+
   &:hover {
     opacity: 1;
   }

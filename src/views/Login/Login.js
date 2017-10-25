@@ -7,12 +7,11 @@ import gql from 'graphql-tag'
 import './Login.css'
 import FormInput from '../../components/FormElements/FormInput'
 import Button from '../../components/Button/Button'
+import type { RouterHistory } from 'react-router-dom'
 
 type Props = {
   mutate: Function,
-  history: {
-    push: string => void
-  }
+  history: RouterHistory
 }
 
 class Login extends Component<Props> {
