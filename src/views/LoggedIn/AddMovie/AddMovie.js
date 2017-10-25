@@ -8,7 +8,6 @@ import type { RouterHistory } from 'react-router-dom'
 import gql from 'graphql-tag'
 import yup from 'yup'
 import FormInput from '../../../components/FormElements/FormInput'
-import FormDebugger from '../../../components/FormElements/FormDebugger'
 import Button from '../../../components/Button/Button'
 
 type Props = {
@@ -33,7 +32,6 @@ const AddMovie = ({ history, mutate }: Props) => {
       }}
       render={({ isValid }) => (
         <Form className="AddMovie">
-          <FormDebugger />
           <FormInput name="imdbId" placeholder="IMDb ID" />
           <FormInput
             min="0"
