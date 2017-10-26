@@ -7,6 +7,8 @@ import gql from 'graphql-tag'
 import type { ApolloBaseData } from '../../../types'
 import Genre from './Genre'
 import Poster from './Poster'
+import Backdrop from './Backdrop'
+import FlexWrap from './FlexWrap'
 import MetaSubtitle from './MetaSubtitle'
 import tmdbLink from '../../../utils/tmdbLink'
 
@@ -50,11 +52,12 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         <h1>{movie.title}</h1>
 
         <MetaSubtitle>Genres</MetaSubtitle>
-        <ul className="Movie__genres">
+
+        <FlexWrap>
           {movie.genres.map((genre, i) => (
             <Genre key={`genre-${i}`}>{genre}</Genre>
           ))}
-        </ul>
+        </FlexWrap>
 
         <MetaSubtitle>Runtime</MetaSubtitle>
         {movie.runtime}
@@ -66,10 +69,10 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
           ))}
         </ul>
       </div>
+
       <div className="Movie__content">
         {movie.backdrop !== '' && (
-          <div
-            className="Movie__backdrop"
+          <Backdrop
             style={{
               backgroundImage: tmdbLink(movie.backdrop, 1280, 'backdrop'),
             }}

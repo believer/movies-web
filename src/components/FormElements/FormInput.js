@@ -3,7 +3,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Field } from 'formik'
-import './FormInput.css'
 import FormLabel from '../FormElements/FormLabel'
 import FormError from './FormError'
 import styled from 'styled-components'
@@ -32,6 +31,27 @@ const Wrap = styled.div`
   transition: border-color ease-in-out 150ms, box-shadow ease-in-out 150ms;
 `
 
+const FormField = styled(Field)`
+  background: none;
+  border: 1px solid transparent;
+  border-radius: 5px;
+  font-size: 16px;
+  padding: 10px 15px;
+  transition: border ease-in-out 150ms, box-shadow ease-in-out 150ms;
+  width: 100%;
+
+  &:focus {
+    border: 1px solid rgb(6, 118, 159);
+    box-shadow: 0px 0px 5px #e77587;
+    outline: none;
+  }
+
+  &:-webkit-autofill {
+    box-shadow: 0 0 0 30px white inset;
+    border: 0;
+  }
+`
+
 const FormInput = (
   { name, placeholder, required, type }: Props,
   { formik }: Context
@@ -43,8 +63,7 @@ const FormInput = (
     <div>
       <FormLabel htmlFor={name} label={placeholder} required={required} />
       <Wrap>
-        <Field
-          className="FormInput"
+        <FormField
           id={name}
           name={name}
           placeholder={placeholder}
