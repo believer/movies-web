@@ -1,12 +1,14 @@
 // @flow
 
 import React from 'react'
-import Feed from './Feed/Feed'
-import Movie from './Movie/Movie'
-import AddMovie from './AddMovie/AddMovie'
 import { Switch, Route } from 'react-router-dom'
 import Navigation from '../../components/Navigation/Navigation'
 import styled from 'styled-components'
+import asyncComponent from '../../environment/asyncComponent'
+
+const AsyncFeed = asyncComponent(() => import('./Feed/Feed'))
+const AsyncAddMovie = asyncComponent(() => import('./AddMovie/AddMovie'))
+const AsyncMovie = asyncComponent(() => import('./Movie/Movie'))
 
 const Home = styled.div`
   background-color: #fff;
@@ -23,9 +25,9 @@ const LoggedIn = () => {
     <Home>
       <Navigation />
       <Switch>
-        <Route path="/dashboard/feed" component={Feed} />
-        <Route path="/dashboard/add-movie" component={AddMovie} />
-        <Route path="/dashboard/movie/:id" component={Movie} />
+        <Route path="/dashboard/feed" component={AsyncFeed} />
+        <Route path="/dashboard/add-movie" component={AsyncAddMovie} />
+        <Route path="/dashboard/movie/:id" component={AsyncMovie} />
       </Switch>
     </Home>
   )

@@ -4,28 +4,12 @@ import React from 'react'
 import { ApolloProvider } from 'react-apollo'
 import { BrowserRouter, Switch, Redirect, Route } from 'react-router-dom'
 import { ThemeProvider } from 'styled-components'
-import Login from './views/Login/Login'
-import LoggedIn from './views/LoggedIn/LoggedIn'
-import { client } from './ApolloSetup'
+import { client } from '../environment/ApolloSetup'
+import asyncComponent from '../environment/asyncComponent'
+import { theme } from '../styles/theme'
+import LoggedIn from './LoggedIn/LoggedIn'
 
-const theme = {
-  primary: '#F16685',
-  breakpoints: {
-    xs: 0,
-    sm: 576,
-    md: 768,
-    lg: 992,
-    xl: 1200,
-  },
-  spacing: {
-    '5': '5px',
-    '10': '10px',
-    '20': '20px',
-    '30': '30px',
-    '60': '60px',
-    auto: 'auto',
-  },
-}
+const AsyncLogin = asyncComponent(() => import('./Login/Login'))
 
 const App = () => {
   return (
@@ -35,7 +19,7 @@ const App = () => {
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/login" />} />
             <Route path="/dashboard" render={LoggedIn} />
-            <Route path="/login" component={Login} />
+            <Route path="/login" component={AsyncLogin} />
           </Switch>
         </BrowserRouter>
       </ThemeProvider>
