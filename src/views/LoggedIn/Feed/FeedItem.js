@@ -7,7 +7,9 @@ import moment from 'moment'
 import type { FeedMovie } from './Feed'
 import type { RouterHistory } from 'react-router-dom'
 import Card from './Card'
+import FeedDate from './FeedDate'
 import FeedItemGenres from './FeedItemGenres'
+import { Margin } from 'styled-components-spacing'
 
 type Props = {
   movie: FeedMovie,
@@ -43,7 +45,7 @@ class FeedItem extends Component<Props> {
     return (
       <Card onClick={this.handleClick}>
         <Gravatar email={movie.user.email} size={40} />
-        <div className="Feed__content">
+        <Margin left="20">
           {movie.title}
           <FeedItemGenres>
             {movie.genres
@@ -51,11 +53,9 @@ class FeedItem extends Component<Props> {
               .sort()
               .join(', ')}
           </FeedItemGenres>
-          <div className="Feed__view-date">
-            {moment(movie.views[0]).fromNow()}
-          </div>
-        </div>
-        <div className="Feed__rating">{movie.rating}</div>
+          <FeedDate>{moment(movie.views[0]).fromNow()}</FeedDate>
+        </Margin>
+        <Margin left="auto">{movie.rating}</Margin>
       </Card>
     )
   }

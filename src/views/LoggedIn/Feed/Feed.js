@@ -1,6 +1,5 @@
 // @flow
 
-import './Feed.css'
 import React from 'react'
 import { graphql } from 'react-apollo'
 import { filter } from 'graphql-anywhere'
@@ -8,6 +7,7 @@ import gql from 'graphql-tag'
 import FeedItem from './FeedItem'
 import type { RouterHistory } from 'react-router-dom'
 import type { ApolloBaseData } from '../../../types'
+import { Padding } from 'styled-components-spacing'
 
 export type FeedMovie = {
   genres: string[],
@@ -36,7 +36,7 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
   }
 
   return (
-    <ul className="Feed">
+    <Padding all={{ xs: '20', md: '60' }}>
       {feed.map((movie, i) => (
         <FeedItem
           history={history}
@@ -44,7 +44,7 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
           movie={filter(FeedItem.fragments.movie, movie)}
         />
       ))}
-    </ul>
+    </Padding>
   )
 }
 
