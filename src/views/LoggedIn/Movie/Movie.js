@@ -10,8 +10,10 @@ import Poster from './Poster'
 import Backdrop from './Backdrop'
 import Loading from '../../../components/Loading/Loading'
 import Link from '../../../components/Link/Link'
+import MovieTitle from './MovieTitle'
 import MovieContent from './MovieContent'
 import MovieOverview from './MovieOverview'
+import Duration from './Duration'
 import MovieList from './MovieList'
 import FlexWrap from './FlexWrap'
 import MetaSubtitle from './MetaSubtitle'
@@ -57,7 +59,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
       <div className="Movie__meta">
         <Poster src={tmdbLink(movie.poster, 500, 'poster')} />
 
-        <h1>{movie.title}</h1>
+        <MovieTitle>{movie.title}</MovieTitle>
 
         <MetaSubtitle>Genres</MetaSubtitle>
 
@@ -68,7 +70,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         </FlexWrap>
 
         <MetaSubtitle>Runtime</MetaSubtitle>
-        {movie.runtime}
+        <Duration runtime={movie.runtime} />
 
         <MetaSubtitle>Director</MetaSubtitle>
         <ul>
