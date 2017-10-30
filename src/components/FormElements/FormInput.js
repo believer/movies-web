@@ -41,7 +41,6 @@ const FormField = styled(Field)`
   width: 100%;
 
   &:focus {
-    border: 1px solid rgb(6, 118, 159);
     box-shadow: 0px 0px 5px #e77587;
     outline: none;
   }
