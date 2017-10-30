@@ -16,3 +16,13 @@
 .Login__form {
   width: 100%;
 }
+
+.Login__register {
+  background: #6DDB98;
+  text-align: center;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
