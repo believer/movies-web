@@ -8,6 +8,7 @@ import FeedItem from './FeedItem'
 import type { RouterHistory } from 'react-router-dom'
 import type { ApolloBaseData } from '../../../types'
 import { Padding } from 'styled-components-spacing'
+import Loading from '../../../components/Loading/Loading'
 
 export type FeedMovie = {
   genres: string[],
@@ -32,7 +33,7 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
   }
 
   if (loading) {
-    return <div>Loading</div>
+    return <Loading />
   }
 
   return (
