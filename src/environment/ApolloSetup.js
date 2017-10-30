@@ -53,5 +53,18 @@ const middlewareLink = new ApolloLink((operation, forward) => {
 
 export const client = new ApolloClient({
   link: middlewareLink.concat(httpLink),
-  cache: new InMemoryCache().restore(window.__APOLLO_STATE__),
+  cache: new InMemoryCache({
+    dataIdFromObject: o => {
+      const generalId = `${o.__typename}:${o.id}`
+
+      // Fix cache behavior for multiple entries
+      // of the same movie with different users
+      // in the feed
+      if (o.user) {
+        return `${generalId}-${o.user.__typename}:${o.user.id}`
+      }
+
+      return generalId
+    },
+  }).restore(window.__APOLLO_STATE__),
 })
