@@ -11,6 +11,9 @@ import type { RouterHistory } from 'react-router-dom'
 import { parse } from 'query-string'
 
 type Props = {
+  location: {
+    search: string
+  },
   mutate: Function,
   history: RouterHistory
 }
@@ -34,7 +37,11 @@ class Login extends Component<Props> {
 
     return (
       <div className="Login">
-        {register && <div className="Login__register">Welcome {registerName}! Login and start adding movies!</div>}
+        {register && (
+          <div className="Login__register">
+            Welcome {registerName}! Login and start adding movies!
+          </div>
+        )}
         <div className="Login__form-wrapper">
           <Formik
             initialValues={{ username: '', password: '' }}
