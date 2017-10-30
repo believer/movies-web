@@ -19,4 +19,5 @@
   padding: 60px;
   position: relative;
   overflow: hidden;
+  z-index: 1;
 }
