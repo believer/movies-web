@@ -3,7 +3,7 @@
 import React, { Component } from 'react'
 import gql from 'graphql-tag'
 import Gravatar from '../../../components/Gravatar/Gravatar'
-import moment from 'moment'
+import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import type { FeedMovie } from './Feed'
 import type { RouterHistory } from 'react-router-dom'
 import Card from './Card'
@@ -53,7 +53,9 @@ class FeedItem extends Component<Props> {
               .sort()
               .join(', ')}
           </FeedItemGenres>
-          <FeedDate>{moment(movie.views[0]).fromNow()}</FeedDate>
+          <FeedDate>
+            {distanceInWordsToNow(movie.views[movie.views.length - 1])}
+          </FeedDate>
         </Margin>
         <Margin left="auto">{movie.rating}</Margin>
       </Card>
