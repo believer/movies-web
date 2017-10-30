@@ -8,6 +8,7 @@ import { client } from '../environment/ApolloSetup'
 import asyncComponent from '../environment/asyncComponent'
 import { theme } from '../styles/theme'
 import LoggedIn from './LoggedIn/LoggedIn'
+import Register from './Register/Register'
 
 const AsyncLogin = asyncComponent(() => import('./Login/Login'))
 
@@ -18,6 +19,7 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/login" />} />
+            <Route path="/register" render={Register} />
             <Route path="/dashboard" render={LoggedIn} />
             <Route path="/login" component={AsyncLogin} />
           </Switch>
