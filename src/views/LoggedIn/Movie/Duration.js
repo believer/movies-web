@@ -2,10 +2,13 @@
 
 import React from 'react'
 import humanizeDuration from 'humanize-duration'
+import styled from 'styled-components'
 
 type Props = {
   runtime: number
 }
+
+const Wrap = styled.div`margin-bottom: 20px;`
 
 const Duration = ({ runtime }: Props) => {
   const shortEn = humanizeDuration.humanizer({
@@ -24,7 +27,7 @@ const Duration = ({ runtime }: Props) => {
     },
   })
 
-  return <div>{shortEn(runtime * 60 * 1000, { delimiter: ' ' })}</div>
+  return <Wrap>{shortEn(runtime * 60 * 1000, { delimiter: ' ' })}</Wrap>
 }
 
 export default Duration
