@@ -21,3 +21,31 @@
   overflow: hidden;
   z-index: 1;
 }
+
+@media (max-width: 768px) {
+  .Movie {
+    grid-template-columns: 250px 1fr;
+  }
+
+  .Movie__meta {
+    padding: 20px;
+  }
+
+  .Movie__content {
+    padding: 40px;
+  }  
+}
+
+
+@media (max-width: 576px) {
+  .Movie {
+    height: auto;
+    grid-template-columns: 1fr;
+  }
+
+  .Movie__meta,
+  .Movie__content {
+    box-shadow: none;
+    padding: 20px;
+  }  
+}
