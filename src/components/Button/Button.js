@@ -18,6 +18,11 @@ const Button = styled.button`
     background-color: #ccc;
   `};
 
+  &:active,
+  &:focus {
+    outline: none;
+  }
+
   &:hover {
     opacity: 1;
   }

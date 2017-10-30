@@ -6,6 +6,7 @@ import { injectGlobal } from 'styled-components'
 
 injectGlobal`
   body {
+    color: #25292E;
     margin: 0;
     padding: 0;
     font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu,Cantarell, "Helvetica Neue", sans-serif;

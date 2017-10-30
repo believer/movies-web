@@ -8,6 +8,11 @@ import type { ApolloBaseData } from '../../../types'
 import Genre from './Genre'
 import Poster from './Poster'
 import Backdrop from './Backdrop'
+import Loading from '../../../components/Loading/Loading'
+import Link from '../../../components/Link/Link'
+import MovieContent from './MovieContent'
+import MovieOverview from './MovieOverview'
+import MovieList from './MovieList'
 import FlexWrap from './FlexWrap'
 import MetaSubtitle from './MetaSubtitle'
 import tmdbLink from '../../../utils/tmdbLink'
@@ -21,12 +26,15 @@ type Props = {
       directors: string[],
       genres: string[],
       title: string,
+      overview: string,
       poster: string,
+      producers: string[],
       runtime: number,
       id: string,
       user: {
         id: string
-      }
+      },
+      writers: string[]
     }
   }
 }
@@ -37,7 +45,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
   }
 
   if (loading) {
-    return <div>Loading</div>
+    return <Loading />
   }
 
   if (!movie) {
@@ -65,33 +73,44 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         <MetaSubtitle>Director</MetaSubtitle>
         <ul>
           {movie.directors.map((person, i) => (
-            <li key={`director-${i}`}>{person}</li>
+            <Link
+              key={`director-${i}`}
+              to={`/dashboard/person/director/${person}`}
+            >
+              {person}
+            </Link>
           ))}
         </ul>
       </div>
 
       <div className="Movie__content">
         {movie.backdrop !== '' && (
-          <Backdrop
-            style={{
-              backgroundImage: tmdbLink(movie.backdrop, 1280, 'backdrop'),
-            }}
-          />
+          <Backdrop src={tmdbLink(movie.backdrop, 1280, 'backdrop')} />
         )}
 
-        <MetaSubtitle>Cast</MetaSubtitle>
-        <ul>
-          {movie.actors.map((person, i) => (
-            <li key={`actor-${i}`}>{person}</li>
-          ))}
-        </ul>
+        <MovieContent>
+          <MetaSubtitle>Story</MetaSubtitle>
+          <MovieOverview>{movie.overview}</MovieOverview>
 
-        <MetaSubtitle>Composer</MetaSubtitle>
-        <ul>
-          {movie.composers.map((person, i) => (
-            <li key={`composer-${i}`}>{person}</li>
-          ))}
-        </ul>
+          <MovieList persons={movie.actors} roleType="actor" title="Cast" />
+
+          <MovieList
+            persons={movie.composers}
+            roleType="composer"
+            title="Composer"
+          />
+
+          <MovieList
+            persons={movie.producers}
+            roleType="producer"
+            title="Producers"
+          />
+          <MovieList
+            persons={movie.writers}
+            roleType="writer"
+            title="Writers"
+          />
+        </MovieContent>
       </div>
     </div>
   )
@@ -111,6 +130,7 @@ const MovieQuery = gql`
       title
       production_companies
       poster
+      producers
       release_date
       overview
       runtime

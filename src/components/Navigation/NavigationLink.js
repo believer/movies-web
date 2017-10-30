@@ -7,7 +7,7 @@ const NavigationLink = styled(NavLink).attrs({
   activeClassName,
 })`
   color: #333;
-  font-size: 14px;
+  font-size: 16px;
   text-decoration: none;
 
   &.${activeClassName} {

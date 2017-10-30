@@ -4,6 +4,7 @@
 //----------------------------------------------------------*/
 
 .Movie {
+  background-color: #fff;
   display: grid;
   height: 100vh;
   grid-template-columns: 350px 1fr;

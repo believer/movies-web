@@ -15,7 +15,7 @@ const Card = styled.li`
   }
 
   &:hover {
-    box-shadow: 0 10px 20px 10px rgba(33, 33, 33, 0.2);
+    box-shadow: 0 5px 20px 5px rgba(33, 33, 33, 0.1);
     transform: scale(1.01);
   }
 `

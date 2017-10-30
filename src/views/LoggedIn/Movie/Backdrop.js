@@ -1,11 +1,12 @@
 import styled from 'styled-components'
 
 const Backdrop = styled.div`
+  background-image: url(${props => props.src});
   background-size: cover;
   bottom: 0;
   filter: blur(50px);
   left: 0;
-  opacity: 0.2;
+  opacity: 0.1;
   position: absolute;
   right: 0;
   transform: scale(2);
