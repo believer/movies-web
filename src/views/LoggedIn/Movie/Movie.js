@@ -119,9 +119,9 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
   )
 }
 
-const MovieQuery = gql`
-  query movie($movieId: String!) {
-    movie(id: $movieId) {
+export const MovieQuery = gql`
+  query movie($id: String!) {
+    movie(id: $id) {
       actors
       backdrop
       countries
@@ -148,7 +148,7 @@ const MovieQuery = gql`
 export default graphql(MovieQuery, {
   options: ({ match }) => ({
     variables: {
-      movieId: match.params.id,
+      id: match.params.id,
     },
   }),
 })(Movie)

@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { compose, graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 import type { ApolloBaseData } from '../../../types'
 import Link from '../../../components/Link/Link'
@@ -11,11 +11,15 @@ import { Padding } from 'styled-components-spacing'
 import format from 'date-fns/format'
 import tmdbLink from '../../../utils/tmdbLink'
 import truncate from 'truncate'
+import { MovieQuery } from '../Movie/Movie'
 
 type Props = {
+  client: {
+    query: Function
+  },
   data: ApolloBaseData & {
     person?: {
-      id: number,
+      id: string,
       overview: string,
       poster: string,
       release_date: string,
@@ -41,6 +45,10 @@ const PersonMovies = styled.div`
   grid-column-gap: 60px;
   grid-row-gap: 40px;
   grid-template-columns: repeat(2, 1fr);
+
+  @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
+    grid-template-columns: 1fr;
+  }
 `
 
 const PersonMovie = styled.div`
@@ -57,7 +65,7 @@ const MovieOverview = styled.p`
   line-height: 1.5em;
 `
 
-const Person = ({ data: { error, loading, person }, match }: Props) => {
+const Person = ({ client, data: { error, loading, person }, match }: Props) => {
   if (error) {
     return <div>{error.message}</div>
   }
@@ -70,6 +78,15 @@ const Person = ({ data: { error, loading, person }, match }: Props) => {
     return null
   }
 
+  const prefetchMovie = (id: string) => () => {
+    client.query({
+      query: MovieQuery,
+      variables: {
+        id,
+      },
+    })
+  }
+
   return (
     <Padding all={{ xs: '20', md: '60' }}>
       <PersonWrap>
@@ -78,7 +95,7 @@ const Person = ({ data: { error, loading, person }, match }: Props) => {
 
         <PersonMovies>
           {person.map(movie => (
-            <PersonMovie key={movie.id}>
+            <PersonMovie key={movie.id} onMouseEnter={prefetchMovie(movie.id)}>
               <Link to={`/dashboard/movie/${movie.id}`}>
                 <img src={tmdbLink(movie.poster, 92, 'poster')} alt="" />
               </Link>
@@ -98,7 +115,7 @@ const Person = ({ data: { error, loading, person }, match }: Props) => {
   )
 }
 
-const PersonQuery = gql`
+export const PersonQuery = gql`
   query person($name: String!, $role: PersonType!) {
     person(name: $name, role: $role) {
       id
@@ -110,11 +127,14 @@ const PersonQuery = gql`
   }
 `
 
-export default graphql(PersonQuery, {
-  options: ({ match }) => ({
-    variables: {
-      name: match.params.name,
-      role: match.params.role,
-    },
-  }),
-})(Person)
+export default compose(
+  withApollo,
+  graphql(PersonQuery, {
+    options: ({ match }) => ({
+      variables: {
+        name: match.params.name,
+        role: match.params.role,
+      },
+    }),
+  })
+)(Person)
