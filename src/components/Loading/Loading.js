@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-const Wrap = styled.p`
+const Wrap = styled.div`
   align-items: center;
   display: flex;
   font-size: 30px;
