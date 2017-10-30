@@ -1,9 +1,9 @@
 /*------------------------------------------------------------
-// Login
+// Register
 //
 //----------------------------------------------------------*/
 
-.Login {
+.Register {
   align-items: center;
   display: flex;
   height: 100vh;
@@ -13,16 +13,6 @@
   width: 400px;
 }
 
-.Login__form {
-  width: 100%;
-}
-
-.Login__register {
-  background: #6DDB98;
-  text-align: center;
-  padding: 20px;
-  position: absolute;
-  top: 0;
-  left: 0;
+.Register__form {
   width: 100%;
 }

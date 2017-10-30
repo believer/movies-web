@@ -17,6 +17,7 @@
     "humanize-duration": "^3.11.0",
     "md5": "^2.2.1",
     "npm-check-updates": "^2.13.0",
+    "query-string": "^5.0.1",
     "react": "^16.0.0",
     "react-apollo": "^2.0.0",
     "react-dom": "^16.0.0",
