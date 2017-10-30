@@ -10,6 +10,7 @@ import { theme } from '../styles/theme'
 import LoggedIn from './LoggedIn/LoggedIn'
 
 const AsyncLogin = asyncComponent(() => import('./Login/Login'))
+const AsyncRegister = asyncComponent(() => import('./Register/Register'))
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
         <BrowserRouter>
           <Switch>
             <Route exact path="/" render={() => <Redirect to="/login" />} />
+            <Route path="/register" component={AsyncRegister} />
             <Route path="/dashboard" render={LoggedIn} />
             <Route path="/login" component={AsyncLogin} />
           </Switch>

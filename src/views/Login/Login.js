@@ -8,6 +8,7 @@ import './Login.css'
 import FormInput from '../../components/FormElements/FormInput'
 import Button from '../../components/Button/Button'
 import type { RouterHistory } from 'react-router-dom'
+import { parse } from 'query-string'
 
 type Props = {
   mutate: Function,
@@ -29,23 +30,28 @@ class Login extends Component<Props> {
   }
 
   render () {
+    const { register, registerName } = parse(this.props.location.search)
+
     return (
       <div className="Login">
-        <Formik
-          initialValues={{ username: '', password: '' }}
-          onSubmit={this.handleSubmit}
-          render={() => (
-            <Form className="Login__form">
-              <FormInput name="username" placeholder="Username" />
-              <FormInput
-                name="password"
-                placeholder="Password"
-                type="password"
-              />
-              <Button type="submit">Login</Button>
-            </Form>
-          )}
-        />
+        {register && <div className="Login__register">Welcome {registerName}! Login and start adding movies!</div>}
+        <div className="Login__form-wrapper">
+          <Formik
+            initialValues={{ username: '', password: '' }}
+            onSubmit={this.handleSubmit}
+            render={() => (
+              <Form className="Login__form">
+                <FormInput name="username" placeholder="Username" />
+                <FormInput
+                  name="password"
+                  placeholder="Password"
+                  type="password"
+                />
+                <Button type="submit">Login</Button>
+              </Form>
+            )}
+          />
+        </div>
       </div>
     )
   }
