@@ -19,6 +19,7 @@ import MovieList from './MovieList'
 import FlexWrap from './FlexWrap'
 import MetaSubtitle from './MetaSubtitle'
 import tmdbLink from '../../../utils/tmdbLink'
+import format from 'date-fns/format'
 
 type Props = {
   data: ApolloBaseData & {
@@ -61,6 +62,9 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         <Poster src={tmdbLink(movie.poster, 500, 'poster')} />
 
         <MovieTitle>{movie.title}</MovieTitle>
+
+        <MetaSubtitle>Release date</MetaSubtitle>
+        <p>{format(movie.release_date, 'YYYY-MM-DD')}</p>
 
         <MetaSubtitle>Genres</MetaSubtitle>
 
