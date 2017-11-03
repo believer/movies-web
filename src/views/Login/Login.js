@@ -8,6 +8,7 @@ import './Login.css'
 import FormInput from '../../components/FormElements/FormInput'
 import Button from '../../components/Button/Button'
 import type { RouterHistory } from 'react-router-dom'
+import { NavLink } from 'react-router-dom'
 import { parse } from 'query-string'
 
 type Props = {
@@ -34,7 +35,11 @@ class Login extends Component<Props> {
 
     return (
       <div className="Login">
-        {register && <div className="Login__register">Welcome {registerName}! Login and start adding movies!</div>}
+        {register && (
+          <div className="Login__register">
+            Welcome {registerName}! Login and start adding movies!
+          </div>
+        )}
         <div className="Login__form-wrapper">
           <Formik
             initialValues={{ username: '', password: '' }}
@@ -47,7 +52,10 @@ class Login extends Component<Props> {
                   placeholder="Password"
                   type="password"
                 />
-                <Button type="submit">Login</Button>
+                <div className="Login__buttons">
+                  <Button type="submit">Login</Button>
+                  <NavLink to="/register">Register</NavLink>
+                </div>
               </Form>
             )}
           />

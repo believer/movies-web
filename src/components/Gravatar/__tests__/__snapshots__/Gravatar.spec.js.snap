@@ -1,8 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`components/Gravatar renders Gravatar 1`] = `
-<div
-  className="Gravatar"
+<styled.div
   style={
     Object {
       "height": 50,
@@ -11,10 +10,9 @@ exports[`components/Gravatar renders Gravatar 1`] = `
     }
   }
 >
-  <img
+  <styled.img
     alt="Name"
-    className="Gravatar__image"
     src="https://www.gravatar.com/avatar/md5&s=50"
   />
-</div>
+</styled.div>
 `;

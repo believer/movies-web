@@ -18,11 +18,17 @@
 }
 
 .Login__register {
-  background: #6DDB98;
+  background: #6ddb98;
   text-align: center;
   padding: 20px;
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
+}
+
+.Login__buttons {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

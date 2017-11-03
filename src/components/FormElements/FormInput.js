@@ -38,6 +38,7 @@ const FormField = styled(Field)`
   font-size: 16px;
   padding: 10px 15px;
   transition: border ease-in-out 150ms, box-shadow ease-in-out 150ms;
+  min-width: 250px;
   width: 100%;
 
   &:focus {
