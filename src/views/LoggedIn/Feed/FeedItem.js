@@ -10,8 +10,13 @@ import Card from './Card'
 import FeedDate from './FeedDate'
 import FeedItemGenres from './FeedItemGenres'
 import { Margin } from 'styled-components-spacing'
+import { withApollo } from 'react-apollo'
+import { MovieQuery } from '../Movie/Movie'
 
 type Props = {
+  client: {
+    query: Function
+  },
   movie: FeedMovie,
   history: RouterHistory
 }
@@ -39,11 +44,23 @@ class FeedItem extends Component<Props> {
     history.push(`/dashboard/movie/${movie.id}`)
   }
 
+  prefetchMovie = (id: string) => () => {
+    this.props.client.query({
+      query: MovieQuery,
+      variables: {
+        id,
+      },
+    })
+  }
+
   render () {
     const { movie } = this.props
 
     return (
-      <Card onClick={this.handleClick}>
+      <Card
+        onClick={this.handleClick}
+        onMouseEnter={this.prefetchMovie(movie.id)}
+      >
         <Gravatar email={movie.user.email} size={40} />
         <Margin left="20">
           {movie.title}
@@ -63,4 +80,4 @@ class FeedItem extends Component<Props> {
   }
 }
 
-export default FeedItem
+export default withApollo(FeedItem)

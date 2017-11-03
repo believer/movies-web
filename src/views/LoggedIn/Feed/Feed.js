@@ -41,7 +41,7 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
       {feed.map((movie, i) => (
         <FeedItem
           history={history}
-          key={`movie-${i}`}
+          key={`movie-${i}-user-${movie.user.id}`}
           movie={filter(FeedItem.fragments.movie, movie)}
         />
       ))}

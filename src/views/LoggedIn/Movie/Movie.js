@@ -12,6 +12,7 @@ import Loading from '../../../components/Loading/Loading'
 import Link from '../../../components/Link/Link'
 import MovieTitle from './MovieTitle'
 import MovieContent from './MovieContent'
+import DirectorList from './DirectorList'
 import MovieOverview from './MovieOverview'
 import Duration from './Duration'
 import MovieList from './MovieList'
@@ -73,7 +74,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         <Duration runtime={movie.runtime} />
 
         <MetaSubtitle>Director</MetaSubtitle>
-        <ul>
+        <DirectorList>
           {movie.directors.map((person, i) => (
             <Link
               key={`director-${i}`}
@@ -82,7 +83,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
               {person}
             </Link>
           ))}
-        </ul>
+        </DirectorList>
       </div>
 
       <div className="Movie__content">
@@ -118,9 +119,9 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
   )
 }
 
-const MovieQuery = gql`
-  query movie($movieId: String!) {
-    movie(id: $movieId) {
+export const MovieQuery = gql`
+  query movie($id: String!) {
+    movie(id: $id) {
       actors
       backdrop
       countries
@@ -147,7 +148,7 @@ const MovieQuery = gql`
 export default graphql(MovieQuery, {
   options: ({ match }) => ({
     variables: {
-      movieId: match.params.id,
+      id: match.params.id,
     },
   }),
 })(Movie)

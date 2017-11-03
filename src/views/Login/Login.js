@@ -12,6 +12,9 @@ import { NavLink } from 'react-router-dom'
 import { parse } from 'query-string'
 
 type Props = {
+  location: {
+    search: string
+  },
   mutate: Function,
   history: RouterHistory
 }
