@@ -57,6 +57,18 @@ export const client = new ApolloClient({
     dataIdFromObject: o => {
       const generalId = `${o.__typename}:${o.id}`
 
+      if (o.__typename === 'CountWithYear') {
+        return `${o.__typename}:${o.year}`
+      }
+
+      if (o.__typename === 'View') {
+        return `${o.__typename}:${o.movie_id}`
+      }
+
+      if (o.__typename === 'ViewDate') {
+        return `${o.__typename}:${o.date}`
+      }
+
       // Fix cache behavior for multiple entries
       // of the same movie with different users
       // in the feed

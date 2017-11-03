@@ -18,6 +18,9 @@ const Navigation = () => {
         <NavigationItem>
           <NavigationLink to="/dashboard/add-movie">Add movie</NavigationLink>
         </NavigationItem>
+        <NavigationItem>
+          <NavigationLink to="/dashboard/profile/:id">Profile</NavigationLink>
+        </NavigationItem>
       </InlineList>
     </Header>
   )
