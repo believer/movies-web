@@ -30,7 +30,7 @@ const LoggedIn = () => {
         <Route path="/dashboard/feed" component={AsyncFeed} />
         <Route path="/dashboard/add-movie" component={AsyncAddMovie} />
         <Route path="/dashboard/movie/:id" component={AsyncMovie} />
-        <Route path="/dashboard/profile/:id" component={AsyncProfile} />
+        <Route path="/dashboard/profile" component={AsyncProfile} />
         <Route path="/dashboard/person/:role/:name" component={AsyncPerson} />
       </Switch>
     </Home>
