@@ -64,7 +64,7 @@ const Movie = ({ data: { error, loading, movie } }: Props) => {
         <MovieTitle>{movie.title}</MovieTitle>
 
         <MetaSubtitle>Release date</MetaSubtitle>
-        <p>{format(movie.release_date, 'YYYY-MM-DD')}</p>
+        <p>{format(movie.release_date, 'D MMMM YYYY')}</p>
 
         <MetaSubtitle>Genres</MetaSubtitle>
 
