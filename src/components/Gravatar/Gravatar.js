@@ -6,7 +6,7 @@ import styled from 'styled-components'
 
 type Props = {
   alt?: string,
-  email: string,
+  email?: string,
   size?: number
 }
 
@@ -26,7 +26,8 @@ const Gravatar = ({ email, alt, size }: Props) => {
   let gravatar = `https://www.gravatar.com/avatar/${md5(email)}`
 
   if (size) {
-    gravatar = `${gravatar}&s=${size}`
+    gravatar = `${gravatar}?
+    s=${size}`
   }
 
   return (
