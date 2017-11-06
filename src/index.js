@@ -6,6 +6,7 @@ import { injectGlobal } from 'styled-components'
 
 injectGlobal`
   body {
+    background-color: #F5F6FA;
     color: #25292E;
     margin: 0;
     padding: 0;
