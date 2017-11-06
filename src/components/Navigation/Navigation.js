@@ -4,9 +4,11 @@ import React from 'react'
 import InlineList from './InlineList'
 import Header from './Header'
 import Logo from './Logo'
+import Profile from './Profile'
 import NavigationItem from './NavigationItem'
 import NavigationLink from './NavigationLink'
 import { deconstructJWT } from '../../utils/token'
+import Gravatar from '../../components/Gravatar/Gravatar'
 
 const Navigation = () => {
   const token = localStorage.getItem('token')
@@ -22,12 +24,12 @@ const Navigation = () => {
         <NavigationItem>
           <NavigationLink to="/dashboard/add-movie">Add movie</NavigationLink>
         </NavigationItem>
-        <NavigationItem>
-          <NavigationLink to={`/dashboard/profile/${id}`}>
-            Profile
-          </NavigationLink>
-        </NavigationItem>
       </InlineList>
+      <Profile>
+        <NavigationLink to={`/dashboard/profile/${id}`}>
+          <Gravatar email="nilspontusnilsson@gmail.com" size={40} />
+        </NavigationLink>
+      </Profile>
     </Header>
   )
 }

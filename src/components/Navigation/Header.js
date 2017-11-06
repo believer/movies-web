@@ -6,6 +6,7 @@ const Header = styled.ul`
   display: flex;
   position: relative;
   z-index: 1;
+  justify-content: space-between;
 `
 
 export default Header
