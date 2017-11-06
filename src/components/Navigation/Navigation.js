@@ -12,7 +12,7 @@ import Gravatar from '../../components/Gravatar/Gravatar'
 
 const Navigation = () => {
   const token = localStorage.getItem('token')
-  const { data: { user: { id } } } = deconstructJWT(token)
+  const { data: { user: { id, email } } } = deconstructJWT(token)
 
   return (
     <Header>
@@ -27,7 +27,7 @@ const Navigation = () => {
       </InlineList>
       <Profile>
         <NavigationLink to={`/dashboard/profile/${id}`}>
-          <Gravatar email="nilspontusnilsson@gmail.com" size={40} />
+          <Gravatar email={email} size={40} />
         </NavigationLink>
       </Profile>
     </Header>
