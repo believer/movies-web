@@ -10,11 +10,13 @@ import FeedGrid from './FeedGrid'
 import FeedWrap from './FeedWrap'
 import FeedToplist, { FeedTopListItem, FeedToplistRating } from './FeedToplist'
 import FeedContent from './FeedContent'
+import { NavLink } from 'react-router-dom'
 import type { RouterHistory } from 'react-router-dom'
 import type { ApolloBaseData } from '../../../types'
 import { Padding } from 'styled-components-spacing'
 import Loading from '../../../components/Loading/Loading'
 import format from 'date-fns/format'
+import Link from '../../../components/Link/Link'
 
 export type FeedMovie = {
   genres: string[],
@@ -77,7 +79,7 @@ const Feed = ({ data: { error, loading, feed, top250 }, history }: Props) => {
           {top250.map((movie, i) => (
             <FeedTopListItem key={`feed-item-${i}`}>
               {i + 1}.
-              {movie.title}
+              <Link to={`/dashboard/movie/${movie.id}`}>{movie.title}</Link>
               <FeedToplistRating>
                 ({movie.average_rating} / {movie.number_of_ratings} votes)
               </FeedToplistRating>
