@@ -75,7 +75,7 @@ const Feed = ({ data: { error, loading, feed, top250 }, history }: Props) => {
         </div>
         <FeedToplist>
           {top250.map((movie, i) => (
-            <FeedTopListItem>
+            <FeedTopListItem key={`feed-item-${i}`}>
               {i + 1}.
               {movie.title}
               <FeedToplistRating>
