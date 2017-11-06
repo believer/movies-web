@@ -251,6 +251,7 @@ const Profile = ({
 const ProfileQuery = gql`
   query profile($id: Int!) {
     users(id: $id) {
+      id
       name
       email
     }

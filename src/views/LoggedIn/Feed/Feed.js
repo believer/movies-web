@@ -7,6 +7,8 @@ import gql from 'graphql-tag'
 import FeedItem from './FeedItem'
 import FeedTitle from './FeedTitle'
 import FeedGrid from './FeedGrid'
+import FeedWrap from './FeedWrap'
+import FeedToplist, { FeedTopListItem, FeedToplistRating } from './FeedToplist'
 import FeedContent from './FeedContent'
 import type { RouterHistory } from 'react-router-dom'
 import type { ApolloBaseData } from '../../../types'
@@ -31,7 +33,7 @@ type Props = {
   history: RouterHistory
 }
 
-const Feed = ({ data: { error, loading, feed }, history }: Props) => {
+const Feed = ({ data: { error, loading, feed, top250 }, history }: Props) => {
   if (error) {
     return <div>{error.message}</div>
   }
@@ -54,20 +56,35 @@ const Feed = ({ data: { error, loading, feed }, history }: Props) => {
 
   return (
     <Padding all={{ xs: '20', md: '60' }}>
-      {Object.keys(groupedFeed).map(date => (
-        <FeedContent key={`movie-${date}`}>
-          <FeedTitle>{date}</FeedTitle>
-          <FeedGrid>
-            {groupedFeed[date].map((movie, i) => (
-              <FeedItem
-                history={history}
-                key={`movie-${i}-user-${movie.user.id}`}
-                movie={filter(FeedItem.fragments.movie, movie)}
-              />
-            ))}
-          </FeedGrid>
-        </FeedContent>
-      ))}
+      <FeedWrap>
+        <div>
+          {Object.keys(groupedFeed).map(date => (
+            <FeedContent key={`movie-${date}`}>
+              <FeedTitle>{date}</FeedTitle>
+              <FeedGrid>
+                {groupedFeed[date].map((movie, i) => (
+                  <FeedItem
+                    history={history}
+                    key={`movie-${i}-user-${movie.user.id}`}
+                    movie={filter(FeedItem.fragments.movie, movie)}
+                  />
+                ))}
+              </FeedGrid>
+            </FeedContent>
+          ))}
+        </div>
+        <FeedToplist>
+          {top250.map((movie, i) => (
+            <FeedTopListItem>
+              {i + 1}.
+              {movie.title}
+              <FeedToplistRating>
+                ({movie.average_rating} / {movie.number_of_ratings} votes)
+              </FeedToplistRating>
+            </FeedTopListItem>
+          ))}
+        </FeedToplist>
+      </FeedWrap>
     </Padding>
   )
 }
@@ -76,6 +93,12 @@ export const FeedQuery = gql`
   query feed {
     feed(limit: 50) {
       ... FeedItemMovie
+    }
+    top250(limit: 10) {
+      id
+      average_rating
+      number_of_ratings
+      title
     }
   }
 

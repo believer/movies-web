@@ -5,9 +5,6 @@ const FeedContent = styled.div`
   display: grid;
   grid-template-columns: 120px 1fr;
   margin-bottom: 40px;
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 960px;
   padding-bottom: 40px;
 
   @media (max-width: ${({ theme }) => theme.breakpoints.md}px) {
