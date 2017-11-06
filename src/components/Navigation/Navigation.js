@@ -6,8 +6,12 @@ import Header from './Header'
 import Logo from './Logo'
 import NavigationItem from './NavigationItem'
 import NavigationLink from './NavigationLink'
+import { deconstructJWT } from '../../utils/token'
 
 const Navigation = () => {
+  const token = localStorage.getItem('token')
+  const { data: { user: { id } } } = deconstructJWT(token)
+
   return (
     <Header>
       <Logo>Movies</Logo>
@@ -19,7 +23,9 @@ const Navigation = () => {
           <NavigationLink to="/dashboard/add-movie">Add movie</NavigationLink>
         </NavigationItem>
         <NavigationItem>
-          <NavigationLink to="/dashboard/profile/:id">Profile</NavigationLink>
+          <NavigationLink to={`/dashboard/profile/${id}`}>
+            Profile
+          </NavigationLink>
         </NavigationItem>
       </InlineList>
     </Header>

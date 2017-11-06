@@ -1,7 +1,7 @@
 // @flow
 
 import React from 'react'
-import { graphql } from 'react-apollo'
+import { compose, graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from '../../../components/Loading/Loading'
 import Gravatar from '../../../components/Gravatar/Gravatar'
@@ -258,8 +258,8 @@ const Profile = ({
 }
 
 const ProfileQuery = gql`
-  query profile {
-    users(id: 2) {
+  query profile($id: Int!) {
+    users(id: $id) {
       name
       email
     }
@@ -297,4 +297,13 @@ const ProfileQuery = gql`
   }
 `
 
-export default graphql(ProfileQuery)(Profile)
+export default compose(
+  withApollo,
+  graphql(ProfileQuery, {
+    options: ({ match }) => ({
+      variables: {
+        id: parseInt(match.params.id, 10),
+      },
+    }),
+  })
+)(Profile)
