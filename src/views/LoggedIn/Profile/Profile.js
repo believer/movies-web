@@ -5,6 +5,7 @@ import { compose, graphql, withApollo } from 'react-apollo'
 import gql from 'graphql-tag'
 import Loading from '../../../components/Loading/Loading'
 import Gravatar from '../../../components/Gravatar/Gravatar'
+import Grid from '../../../components/shared/Grid'
 import format from 'date-fns/format'
 import styled from 'styled-components'
 import { Margin, Padding } from 'styled-components-spacing'
@@ -95,16 +96,6 @@ const MovieTitle = styled.div`
 const SectionTitle = styled.div`
   font-size: 32px;
   font-weight: 700;
-`
-
-const Grid = styled.div`
-  display: grid;
-  grid-template-columns: repeat(${({ columns }) => columns || 1}, 1fr);
-  grid-column-gap: ${({ columnGap }) => columnGap || 0};
-  grid-row-gap: ${({ rowGap }) => rowGap || 0};
-  margin-left: auto;
-  margin-right: auto;
-  max-width: 960px;
 `
 
 const GridItem = styled.div`text-align: center;`
@@ -279,7 +270,7 @@ const ProfileQuery = gql`
         ...runtime
       }
     }
-    views(limit: 20) {
+    views(limit: 10) {
       movie_id
       title
       dates {

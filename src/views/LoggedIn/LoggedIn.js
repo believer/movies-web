@@ -13,7 +13,6 @@ const AsyncPerson = asyncComponent(() => import('./Person/Person'))
 const AsyncProfile = asyncComponent(() => import('./Profile/Profile'))
 
 const Home = styled.div`
-  background-color: #fff;
   border-radius: 6px;
   display: grid;
   grid-template-rows: 60px 1fr;

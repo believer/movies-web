@@ -6,12 +6,13 @@ import Gravatar from '../../../components/Gravatar/Gravatar'
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now'
 import type { FeedMovie } from './Feed'
 import type { RouterHistory } from 'react-router-dom'
-import Card from './Card'
+import { Card, CardContent, CardPoster, CardTitle, CardMeta } from './Card'
 import FeedDate from './FeedDate'
+import FeedRating from './FeedRating'
 import FeedItemGenres from './FeedItemGenres'
-import { Margin } from 'styled-components-spacing'
 import { withApollo } from 'react-apollo'
 import { MovieQuery } from '../Movie/Movie'
+import tmdbLink from '../../../utils/tmdbLink'
 
 type Props = {
   client: {
@@ -25,10 +26,12 @@ class FeedItem extends Component<Props> {
   static fragments = {
     movie: gql`
       fragment FeedItemMovie on Movie {
+        backdrop
         genres
         id
         title
         rating
+        poster
         user {
           email
           id
@@ -61,20 +64,23 @@ class FeedItem extends Component<Props> {
         onClick={this.handleClick}
         onMouseEnter={this.prefetchMovie(movie.id)}
       >
-        <Gravatar email={movie.user.email} size={40} />
-        <Margin left="20">
-          {movie.title}
-          <FeedItemGenres>
-            {movie.genres
-              .slice()
-              .sort()
-              .join(', ')}
-          </FeedItemGenres>
-          <FeedDate>
-            {distanceInWordsToNow(movie.views[movie.views.length - 1])}
-          </FeedDate>
-        </Margin>
-        <Margin left="auto">{movie.rating}</Margin>
+        <CardPoster src={tmdbLink(movie.poster, 154, 'poster')} alt="" />
+        <CardContent>
+          <CardMeta>
+            <CardTitle>{movie.title}</CardTitle>
+            <FeedItemGenres>
+              {movie.genres
+                .slice()
+                .sort()
+                .join(', ')}
+            </FeedItemGenres>
+            <FeedDate>
+              {distanceInWordsToNow(movie.views[movie.views.length - 1])}
+            </FeedDate>
+          </CardMeta>
+          <Gravatar email={movie.user.email} size={30} />
+        </CardContent>
+        <FeedRating>{movie.rating}</FeedRating>
       </Card>
     )
   }

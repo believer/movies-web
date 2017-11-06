@@ -1,5 +1,7 @@
 export const theme = {
   primary: '#F16685',
+  medium: '#FF9F6C',
+  success: '#90E762',
   breakpoints: {
     xs: 0,
     sm: 576,
