@@ -23,7 +23,6 @@ type Context = {
 
 const Wrap = styled.div`
   background: #fff;
-  border: 1px solid #ccc;
   border-radius: 3px;
   box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
   display: flex;
@@ -33,7 +32,7 @@ const Wrap = styled.div`
 
 const FormField = styled(Field)`
   background: none;
-  border: 1px solid transparent;
+  border: 1px solid #ccc;
   border-radius: 5px;
   font-size: 16px;
   padding: 10px 15px;
@@ -42,7 +41,7 @@ const FormField = styled(Field)`
   width: 100%;
 
   &:focus {
-    box-shadow: 0px 0px 5px #e77587;
+    border-color: #e77587;
     outline: none;
   }
 

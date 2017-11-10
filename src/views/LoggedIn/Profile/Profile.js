@@ -52,7 +52,7 @@ type Props = {
     loading: boolean,
     users: User[],
     watches: Watches,
-    userMoviesPerYear: CountWithYear,
+    userMoviesPerYear: CountWithYear[],
     userRuntime: {
       total_with_rewatches: Runtime,
       total: Runtime

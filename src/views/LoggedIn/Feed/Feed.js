@@ -10,7 +10,6 @@ import FeedGrid from './FeedGrid'
 import FeedWrap from './FeedWrap'
 import FeedToplist, { FeedTopListItem, FeedToplistRating } from './FeedToplist'
 import FeedContent from './FeedContent'
-import { NavLink } from 'react-router-dom'
 import type { RouterHistory } from 'react-router-dom'
 import type { ApolloBaseData } from '../../../types'
 import { Padding } from 'styled-components-spacing'
@@ -31,7 +30,15 @@ export type FeedMovie = {
 }
 
 type Props = {
-  data: ApolloBaseData & { feed: FeedMovie[] },
+  data: ApolloBaseData & {
+    feed: FeedMovie[],
+    top250: {
+      id: string,
+      average_rating: number,
+      number_of_ratings: number,
+      title: string
+    }[]
+  },
   history: RouterHistory
 }
 
@@ -76,6 +83,7 @@ const Feed = ({ data: { error, loading, feed, top250 }, history }: Props) => {
           ))}
         </div>
         <FeedToplist>
+          <h3>Top 10</h3>
           {top250.map((movie, i) => (
             <FeedTopListItem key={`feed-item-${i}`}>
               {i + 1}.

@@ -18,12 +18,21 @@ type Props = {
 }
 
 const Wrap = styled.div`
+  align-items: flex-start;
   display: flex;
   flex-direction: column;
+  margin-left: auto;
+  margin-right: auto;
   max-width: 600px;
 `
 
-const AddMovieForm = styled(Form)`width: 100%;`
+const AddMovieForm = styled(Form)`
+  background-color: #fff;
+  border: 1px solid #e7e8e9;
+  border-radius: 5px;
+  padding: 40px;
+  width: 100%;
+`
 
 const AddMovie = ({ history, mutate }: Props) => {
   return (
@@ -45,13 +54,7 @@ const AddMovie = ({ history, mutate }: Props) => {
           <Padding all={{ xs: '20', md: '60' }}>
             <AddMovieForm>
               <FormInput name="imdbId" placeholder="IMDb ID" />
-              <FormInput
-                min="0"
-                max="10"
-                name="rating"
-                placeholder="Rating"
-                type="number"
-              />
+              <FormInput name="rating" placeholder="Rating" type="tel" />
               <FormInput name="date" placeholder="Date" type="date" />
               <FormCheckbox
                 name="wilhelm"
@@ -65,11 +68,14 @@ const AddMovie = ({ history, mutate }: Props) => {
           </Padding>
         )}
         validationSchema={yup.object().shape({
-          imdbId: yup.string().required(),
+          imdbId: yup
+            .string()
+            .matches(/tt\d+/, 'Invalid IMDb URL or ID')
+            .required('IMDb ID is required'),
           rating: yup
             .number()
-            .min(1)
-            .max(10),
+            .min(1, 'Lowest rating is 1')
+            .max(10, 'Maximum rating is 10'),
           date: yup.date(),
           wilhelm: yup.boolean(),
         })}
